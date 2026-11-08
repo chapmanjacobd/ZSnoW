@@ -12,6 +12,10 @@ I will fix them, feel free to open an issue.
 
 
 ## Support
+KDE Plasma's Wayland session is supported, as are Sway and other layer-shell compositors.
+Snow appears above the wallpaper and behind application windows, without intercepting mouse or keyboard input.
+X11 sessions are not supported.
+
 Your wayland compositor has to support the `zwlr_layer_shell_v1` protocoll.
 To check if yours does refer to [here](https://wayland.app/protocols/wlr-layer-shell-unstable-v1#compositor-support)
 
@@ -34,13 +38,13 @@ To build the project, you need the Zig compiler and a Wayland development enviro
 
 1. Install Zig: Download Zig from the official website or use your system's package manager if available.
 2. Install dependencies:
-  - Ensure the needed wayland protocols are installed [wlr-protocols](https://gitlab.freedesktop.org/wlroots/wlr-protocols/) and [wayland-protocols](https://gitlab.freedesktop.org/wayland/wayland-protocols)
-  - The zig-wayland dependency will be automatically fetched during the build process.
+  - Ensure [wayland-protocols](https://gitlab.freedesktop.org/wayland/wayland-protocols) and the Wayland client development libraries are installed.
+  - The zig-wayland and wlr-protocols dependencies will be automatically fetched during the build process.
 
 3. Clone the repository
 4. Build the executable using `zig build -Doptimize=ReleaseSafe`
   Replace -Doptimize=ReleaseSafe with -Doptimize=ReleaseFast or -Doptimize=Debug depending on your preferred optimization level.
-5. Copy the generated executable from `zig-out/bin` to a desired location.
+5. Run `make install` to build in ReleaseSafe mode and install the executable to `~/.local/bin/zsnow`.
 6. Let it snow by executing `zsnow`
 
 ## Contribution

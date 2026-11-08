@@ -41,7 +41,7 @@ pub fn init(compositor: *wl.Compositor, layer_shell: *zwlr.LayerShellV1, output:
     const layer_surface = try layer_shell.getLayerSurface(
         surface,
         output.wl_output,
-        zwlr.LayerShellV1.Layer.background,
+        zwlr.LayerShellV1.Layer.bottom,
         "ZSnoW",
     );
     errdefer layer_surface.destroy();
@@ -52,6 +52,8 @@ pub fn init(compositor: *wl.Compositor, layer_shell: *zwlr.LayerShellV1, output:
         .right = true,
     });
     layer_surface.setSize(0, 0);
+    layer_surface.setExclusiveZone(-1);
+    layer_surface.setKeyboardInteractivity(.none);
 
     return .{
         .surface = surface,

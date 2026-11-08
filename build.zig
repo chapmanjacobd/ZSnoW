@@ -21,7 +21,8 @@ pub fn build(b: *std.Build) void {
     const wayland = b.createModule(.{ .root_source_file = scanner.result });
 
     scanner.addSystemProtocol("stable/xdg-shell/xdg-shell.xml");
-    scanner.addCustomProtocol(.{ .cwd_relative = "/usr/share/wlr-protocols/unstable/wlr-layer-shell-unstable-v1.xml" });
+    const wlr_protocols = b.dependency("wlr_protocols", .{});
+    scanner.addCustomProtocol(wlr_protocols.path("unstable/wlr-layer-shell-unstable-v1.xml"));
 
     scanner.generate("wl_compositor", 6);
     scanner.generate("wl_shm", 2);
